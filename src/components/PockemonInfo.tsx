@@ -1,27 +1,24 @@
-import React from 'react'
-import {Pockemon} from './PockemonRow/module'
+import { UsePockemonContext } from '../store/PockemonContext';
 
-interface PockemonInfoProps {
-  pockemon: Pockemon
-}
+function PockemonInfo() {
+  const pockemonCtx = UsePockemonContext();
 
-function PockemonInfo(props: PockemonInfoProps) {
-  const {name, base} = props.pockemon
+  const { name, base } = pockemonCtx?.selectedPockenon!;
   return (
     <div>
       <h4>{name.english}</h4>
-        <table >
-          <tbody>
+      <table>
+        <tbody>
           {Object.entries(base).map(([key, value], i) => (
             <tr key={i}>
               <td>{key}</td>
               <td>{value}</td>
             </tr>
           ))}
-      </tbody>
-    </table>
+        </tbody>
+      </table>
     </div>
-  )
+  );
 }
 
-export default PockemonInfo
+export default PockemonInfo;

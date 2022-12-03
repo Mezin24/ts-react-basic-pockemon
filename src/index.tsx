@@ -4,14 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import CssBaseline from '@mui/material/CssBaseline';
+import { PockemonContextProvider } from './store/PockemonContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <CssBaseline />
-    <App />
+    <PockemonContextProvider>
+      <CssBaseline />
+      <App />
+    </PockemonContextProvider>
   </React.StrictMode>
 );
 

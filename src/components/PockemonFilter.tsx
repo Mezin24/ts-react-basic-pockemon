@@ -1,15 +1,14 @@
-interface PockemonFilterProps {
-  filter: string;
-  setFilter: (str: string) => void;
-}
+import { UsePockemonContext } from '../store/PockemonContext';
 
-const PockemonFilter = ({ filter, setFilter }: PockemonFilterProps) => {
+const PockemonFilter = () => {
+  const pockemonCtx = UsePockemonContext();
+
   return (
     <input
       type='text'
       className='search-input'
-      value={filter}
-      onChange={(e) => setFilter(e.target.value)}
+      value={pockemonCtx?.filter}
+      onChange={(e) => pockemonCtx?.setFilter(e.target.value)}
     />
   );
 };

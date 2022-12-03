@@ -2,23 +2,49 @@ import {
   createContext,
   useContext,
   ReactNode,
-  useState,
   useEffect,
+  useReducer,
 } from 'react';
 import { Pockemon } from '../components/PockemonRow/module';
 
 interface PockemonContextInterface {
+  state: PockemonState;
+  dispatch: (action: ACTIONTYPE) => void;
+}
+
+interface PockemonState {
+  pockemons: Pockemon[];
   filter: string;
   selectedPockenon: Pockemon | null;
-  filteredPockemons: Pockemon[];
-  setFilter: (str: string) => void;
-  setPockemons: (pockemons: Pockemon[]) => void;
-  selectPockemonHandler: (id: number) => void;
 }
 
 interface PockemonContextProviderProps {
   children: ReactNode;
 }
+
+const initialState: PockemonState = {
+  pockemons: [],
+  filter: '',
+  selectedPockenon: null,
+};
+
+type ACTIONTYPE =
+  | { type: 'SET_POCKEMONS'; payload: Pockemon[] }
+  | { type: 'SET_FILTER'; payload: string }
+  | { type: 'SET_SELECTED_POCKEMON'; payload: Pockemon };
+
+const pockemonReducer = (state: PockemonState, action: ACTIONTYPE) => {
+  switch (action.type) {
+    case 'SET_FILTER':
+      return { ...state, filter: action.payload };
+    case 'SET_POCKEMONS':
+      return { ...state, pockemons: action.payload };
+    case 'SET_SELECTED_POCKEMON':
+      return { ...state, selectedPockenon: action.payload };
+    default:
+      throw new Error('Bad action');
+  }
+};
 
 export const PockemonContext = createContext<PockemonContextInterface | null>(
   null
@@ -27,36 +53,17 @@ export const PockemonContext = createContext<PockemonContextInterface | null>(
 export const PockemonContextProvider = ({
   children,
 }: PockemonContextProviderProps) => {
-  const [pockemons, setPockemons] = useState<Pockemon[]>([]);
-  const [filter, setFilter] = useState('');
-  const [selectedPockenon, setSelectedPockenon] = useState<Pockemon | null>(
-    null
-  );
+  const [state, dispatch] = useReducer(pockemonReducer, initialState);
 
   useEffect(() => {
     fetch('http://localhost:3004/pockemons')
       .then((res) => res.json())
-      .then((data) => setPockemons(data));
+      .then((data) => dispatch({ type: 'SET_POCKEMONS', payload: data }));
   }, []);
 
-  const filteredPockemons = pockemons
-    .slice(0, 30)
-    .filter((item) =>
-      item.name.english.toLowerCase().includes(filter.toLowerCase())
-    );
-
-  const selectPockemonHandler = (id: number) => {
-    const selectedPockemon = filteredPockemons.find((item) => item.id === id)!;
-    setSelectedPockenon(selectedPockemon);
-  };
-
   const sampleAppContext: PockemonContextInterface = {
-    filteredPockemons,
-    selectedPockenon,
-    filter,
-    setPockemons,
-    setFilter,
-    selectPockemonHandler,
+    state,
+    dispatch,
   };
 
   return (

@@ -3,7 +3,7 @@ import { Pockemon } from './module';
 
 interface PockemonRowProps {
   pockemon: Pockemon;
-  onSelect: (id: number) => void;
+  onSelect: () => void;
 }
 
 function PockemonRow(props: PockemonRowProps) {
@@ -16,7 +16,7 @@ function PockemonRow(props: PockemonRowProps) {
         <Button
           variant='contained'
           style={{ cursor: 'pointer' }}
-          onClick={() => props.onSelect(id)}
+          onClick={() => props.onSelect()}
         >
           Select
         </Button>

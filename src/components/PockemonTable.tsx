@@ -4,6 +4,14 @@ import { UsePockemonContext } from '../store/PockemonContext';
 function PockemonTable() {
   const pockemonCtx = UsePockemonContext();
 
+  const filteredPockemons = pockemonCtx?.state.pockemons
+    .slice(0, 30)
+    .filter((item) =>
+      item.name.english
+        .toLowerCase()
+        .includes(pockemonCtx?.state.filter.toLowerCase())
+    );
+
   return (
     <table
       style={{
@@ -17,11 +25,16 @@ function PockemonTable() {
         </tr>
       </thead>
       <tbody>
-        {pockemonCtx?.filteredPockemons.map((p) => (
+        {filteredPockemons?.map((p) => (
           <PockemonRow
             key={p.id}
             pockemon={p}
-            onSelect={pockemonCtx.selectPockemonHandler}
+            onSelect={() =>
+              pockemonCtx?.dispatch({
+                type: 'SET_SELECTED_POCKEMON',
+                payload: p,
+              })
+            }
           />
         ))}
       </tbody>

@@ -7,8 +7,10 @@ const PockemonFilter = () => {
     <input
       type='text'
       className='search-input'
-      value={pockemonCtx?.filter}
-      onChange={(e) => pockemonCtx?.setFilter(e.target.value)}
+      value={pockemonCtx?.state.filter}
+      onChange={(e) =>
+        pockemonCtx?.dispatch({ type: 'SET_FILTER', payload: e.target.value })
+      }
     />
   );
 };

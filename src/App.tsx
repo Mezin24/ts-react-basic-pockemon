@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import PockemonRow from './components/PockemonRow';
 import PockemonInfo from './components/PockemonInfo';
+import PockemonFilter from './components/PockemonFilter';
 import { Pockemon } from './components/PockemonRow/module';
 import styled from 'styled-components';
 import './App.css';
@@ -11,7 +12,7 @@ const DoubleContainer = styled.div`
   margin: 1rem auto;
   display: grid;
   grid-template-columns: 70% 30%;
-`
+`;
 
 function App() {
   const [pockemons, setPockemons] = useState<Pockemon[]>([]);
@@ -21,9 +22,9 @@ function App() {
   );
 
   useEffect(() => {
-    fetch('http://localhost:5500/pockemons')
-      .then(res => res.json())
-      .then(data => setPockemons(data))
+    fetch('http://localhost:3004/pockemons')
+      .then((res) => res.json())
+      .then((data) => setPockemons(data));
   }, []);
 
   const filteredPockemons = pockemons
@@ -49,12 +50,7 @@ function App() {
       >
         Pokemon Search
       </h1>
-      <input
-        type='text'
-        className='search-input'
-        value={filter}
-        onChange={(e) => setFilter(e.target.value)}
-      />
+      <PockemonFilter filter={filter} setFilter={(str) => setFilter(str)} />
       <DoubleContainer>
         <table
           style={{

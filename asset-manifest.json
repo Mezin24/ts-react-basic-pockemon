@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Mezin24/ts-react-basic-pockemon/static/css/main.c352d98c.css",
+    "main.js": "/Mezin24/ts-react-basic-pockemon/static/js/main.e8198bc3.js",
+    "static/js/787.293c2eec.chunk.js": "/Mezin24/ts-react-basic-pockemon/static/js/787.293c2eec.chunk.js",
+    "index.html": "/Mezin24/ts-react-basic-pockemon/index.html",
+    "main.c352d98c.css.map": "/Mezin24/ts-react-basic-pockemon/static/css/main.c352d98c.css.map",
+    "main.e8198bc3.js.map": "/Mezin24/ts-react-basic-pockemon/static/js/main.e8198bc3.js.map",
+    "787.293c2eec.chunk.js.map": "/Mezin24/ts-react-basic-pockemon/static/js/787.293c2eec.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c352d98c.css",
+    "static/js/main.e8198bc3.js"
+  ]
+}

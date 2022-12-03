@@ -56,9 +56,11 @@ export const PockemonContextProvider = ({
   const [state, dispatch] = useReducer(pockemonReducer, initialState);
 
   useEffect(() => {
-    fetch('http://localhost:3004/pockemons')
+    fetch('http://localhost:3000/pockemon.json')
       .then((res) => res.json())
-      .then((data) => dispatch({ type: 'SET_POCKEMONS', payload: data }));
+      .then((data) =>
+        dispatch({ type: 'SET_POCKEMONS', payload: data.pockemons })
+      );
   }, []);
 
   const sampleAppContext: PockemonContextInterface = {

@@ -1,6 +1,7 @@
 {
   "name": "react-basic",
   "version": "0.1.0",
+  "homepage": "https://github.com/Mezin24/ts-react-basic-pockemon",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -26,6 +27,8 @@
   "scripts": {
     "start": "react-scripts start",
     "serve": "json-server --watch pockemon.json --port 3004",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

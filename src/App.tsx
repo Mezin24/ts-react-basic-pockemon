@@ -1,7 +1,6 @@
 import PockemonInfo from './components/PockemonInfo';
 import PockemonFilter from './components/PockemonFilter';
 import PockemonTable from './components/PockemonTable';
-import { UsePockemonContext } from './store/PockemonContext';
 import styled from 'styled-components';
 import './App.css';
 
@@ -20,15 +19,13 @@ const Title = styled.h1`
 `;
 
 function App() {
-  const pockemonCtx = UsePockemonContext();
-
   return (
     <div>
       <Title>Pokemon Search</Title>
       <PockemonFilter />
       <DoubleContainer>
         <PockemonTable />
-        {pockemonCtx?.selectedPockenon && <PockemonInfo />}
+        <PockemonInfo />
       </DoubleContainer>
     </div>
   );
